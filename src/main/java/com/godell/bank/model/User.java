@@ -11,6 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+
+
 
 
 @Entity
@@ -21,19 +25,24 @@ public class User {
 	@Column(name = "user_id")
 	private Long userId;
 	
-
+	@NotNull(message="User name is required")
 	@Column(name = "user_name")
 	private String userName;
 
+	@NotNull(message="accountType is required")
 	@Column(name = "account_type")
 	private String accountType;
 	
+	@NotNull(message="mobileNumber is required")
 	private int mobileNumber;
 	
+	@NotNull(message="email is required")
 	private String email;
 	
+	@NotNull(message="dateOfBirth is required")
 	private LocalDate dateOfBirth;
 	
+	@NotNull(message="pan is required")
 	private String pan;
 	
 	@OneToMany(mappedBy = "user")

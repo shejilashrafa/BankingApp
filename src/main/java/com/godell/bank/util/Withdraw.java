@@ -18,7 +18,7 @@ public class Withdraw implements BankTransaction{
 
 	
 	@Override
-	public Account accountTransaction(BankTransactions transaction) {
+	public synchronized Account accountTransaction(BankTransactions transaction) {
 		double finalTransactionAmount=0;
 		Account account=bankTransactionDao.getAccountWithAccountId(transaction.getAccountId());
 		if(account==null) {

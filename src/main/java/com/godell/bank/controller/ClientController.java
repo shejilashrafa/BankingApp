@@ -1,5 +1,7 @@
 package com.godell.bank.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 //import javax.validation.Valid;
@@ -23,8 +25,8 @@ public class ClientController {
 	@Autowired
 	ClientService clientService;
 	
-	@PostMapping("/createUsert")
-	public ResponseEntity<UserDto> createAccount(@RequestBody User user) {
+	@PostMapping("/createUser")
+	public ResponseEntity<UserDto> createAccount(@Valid @RequestBody User user) {
 		UserDto createdUser=clientService.createUser(user);
 		
 		

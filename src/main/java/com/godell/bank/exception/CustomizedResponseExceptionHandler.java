@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.http.HttpHeaders;
 
 @ControllerAdvice
 public class CustomizedResponseExceptionHandler extends ResponseEntityExceptionHandler{
@@ -36,5 +38,11 @@ public class CustomizedResponseExceptionHandler extends ResponseEntityExceptionH
 		
 	}
 	
+	@Override
+	  protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+	      HttpHeaders headers, HttpStatus status, WebRequest request) {
+	    ErrorDetails errorDetails = new ErrorDetails(ex.getMessage(),LocalDateTime.now(), request.getDescription(false));
+	    return new ResponseEntity<Object>(errorDetails, HttpStatus.BAD_REQUEST);
+	  }
 
 }
