@@ -30,7 +30,7 @@ public class ClientServiceImpl implements ClientService {
 	@Override
 	public UserDto createUser(User user) {
 		
-		List<User> allUsers=clientDao.getAllUsers();
+		//List<User> allUsers=clientDao.getAllUsers();
 		
 		
 		user.setUserActivateStatus(true);
