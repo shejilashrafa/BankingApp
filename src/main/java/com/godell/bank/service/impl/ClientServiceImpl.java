@@ -1,6 +1,7 @@
 package com.godell.bank.service.impl;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,10 @@ public class ClientServiceImpl implements ClientService {
 
 	@Override
 	public UserDto createUser(User user) {
+		
+		List<User> allUsers=clientDao.getAllUsers();
+		
+		
 		user.setUserActivateStatus(true);
 		user.setDateOfBirth(LocalDate.now());
 		User createdUser=clientDao.createUser(user);

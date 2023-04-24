@@ -1,5 +1,7 @@
 package com.godell.bank.dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +33,16 @@ public class ClientDaoImpl implements ClientDao {
 	@Override
 	public User createUser(User user) {
 		Session session = sessionFactory.getCurrentSession();
-		User createdUser=(User) session.merge(user);
+		User createdUser=(User) session.save(user);
 		return createdUser;
+	}
+
+
+	@Override
+	public List<User> getAllUsers() {
+		Session session = sessionFactory.getCurrentSession();
+		List<User> allUsers=session.createQuery("SELECT user FROM user a", User.class).getResultList();      
+		return allUsers;
 	}
 
 }
