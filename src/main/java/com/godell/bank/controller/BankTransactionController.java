@@ -28,15 +28,15 @@ public class BankTransactionController {
 	
 	@PostMapping("bankTransaction")
 	public ResponseEntity<TransactionDto> bankingTransaction(@RequestBody BankTransactions transactions){
-		logger.info("Recieved transaction with accountId"+transactions.getAccountId());
+		logger.info("Recieved transaction with accountId"+transactions.getAccount().getSourceAccountId());
 		TransactionDto postTranAccount=transactionsService.transactionByBank(transactions);
 		if(postTranAccount==null) {
-			logger.info("Account id "+transactions.getAccountId()+" is invalid");
-			throw new AccountNotFoundException(ACC_ID+transactions.getAccountId());
+			logger.info("Account id "+transactions.getAccount().getSourceAccountId()+" is invalid");
+			throw new AccountNotFoundException(ACC_ID+transactions.getAccount().getSourceAccountId());
 		}
 		if(postTranAccount.getStatus().equals(INSUFFICIENT_BALANCE)) {
-			logger.info("Account id "+transactions.getAccountId()+"'s balance is insufficien");
-			throw new InsufficinetBalanaceException(ACC_ID+transactions.getAccountId());
+			logger.info("Account id "+transactions.getAccount().getSourceAccountId()+"'s balance is insufficient");
+			throw new InsufficinetBalanaceException(ACC_ID+transactions.getAccount().getSourceAccountId());
 			
 		}
 		return new ResponseEntity<TransactionDto>(postTranAccount, HttpStatus.OK);

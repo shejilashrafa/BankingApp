@@ -28,37 +28,33 @@ public class Account {
 
 	@Column(name = "account_type")
 	private String accountType;
-	
-	@Column(name="balance",columnDefinition = "Decimal(10,2)default'0.00'")
+
+	@Column(name = "balance", columnDefinition = "Decimal(10,2)default'0.00'")
 	private double balance;
-	
+
 	@OneToMany(mappedBy = "account")
 	private List<BankTransactions> bankTransactions;
 
 	@ManyToOne
-	@JoinColumn(name="user_id", nullable=false)
+	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
-	
+
 	public List<BankTransactions> getTransactions() {
 		return bankTransactions;
 	}
-
 
 	public void setTransactions(List<BankTransactions> transactions) {
 		this.bankTransactions = bankTransactions;
 	}
 
-
 	public Account() {
 		super();
-		
+
 	}
-	
 
 	public Long getSourceAccountId() {
 		return sourceAccountId;
 	}
-
 
 	public void setSourceAccountId(Long sourceAccountId) {
 		this.sourceAccountId = sourceAccountId;
@@ -68,26 +64,21 @@ public class Account {
 		return createdAt;
 	}
 
-
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
 	}
-
 
 	public String getAccountType() {
 		return accountType;
 	}
 
-
 	public void setAccountType(String accountType) {
 		this.accountType = accountType;
 	}
 
-
 	public double getBalance() {
 		return balance;
 	}
-
 
 	public void setBalance(double balance) {
 		this.balance = balance;
@@ -97,22 +88,17 @@ public class Account {
 		return bankTransactions;
 	}
 
-
 	public void setBankTransactions(List<BankTransactions> bankTransactions) {
 		this.bankTransactions = bankTransactions;
 	}
-
 
 	public User getUser() {
 		return user;
 	}
 
-
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-	
 
 	@Override
 	public String toString() {
@@ -120,7 +106,6 @@ public class Account {
 				+ accountType + ", balance=" + balance + ", bankTransactions=" + bankTransactions + ", user=" + user
 				+ "]";
 	}
-
 
 	public Account(Long sourceAccountId, LocalDateTime createdAt, String accountType, double balance,
 			List<BankTransactions> bankTransactions, User user) {
@@ -132,9 +117,5 @@ public class Account {
 		this.bankTransactions = bankTransactions;
 		this.user = user;
 	}
-
-
-	
-	
 
 }

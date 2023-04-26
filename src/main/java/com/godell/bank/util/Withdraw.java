@@ -1,6 +1,7 @@
 package com.godell.bank.util;
 
 import java.util.ArrayList;
+import static com.godell.bank.util.BankingAppConstants.*;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -20,14 +21,14 @@ public class Withdraw implements BankTransaction{
 	@Override
 	public synchronized Account accountTransaction(BankTransactions transaction) {
 		double finalTransactionAmount=0;
-		Account account=bankTransactionDao.getAccountWithAccountId(transaction.getAccountId());
+		Account account=bankTransactionDao.getAccountWithAccountId(transaction.getAccount().getSourceAccountId());
 		if(account==null) {
-			logger.info("Account id "+transaction.getAccountId()+" is invalid");
+			logger.info("Account id "+transaction.getAccount().getSourceAccountId()+" is invalid");
 			return null;
 			
 		}	
 		if(account.getBalance()<transaction.getAmount()) {
-			transaction.setTran_sastus("INSUFFICIENT_BALANCE");
+			transaction.setTran_sastus(INSUFFICIENT_BALANCE);
 			return account;
 		}
 		finalTransactionAmount=TransactionOperationEnum.WITHDRAW.transactionOperation(account.getBalance(),transaction.getAmount());

@@ -17,15 +17,22 @@ public class ClientDaoImpl implements ClientDao {
 	
 	@Autowired
 	private SessionFactory sessionFactory;
+	
+	public Session getSession() {
+		return sessionFactory.getCurrentSession();
+	}
 
+	public void setSessionfactory(SessionFactory sessionfactory) {
+		this.sessionFactory = sessionfactory;
+	}
 	
 	@Override
 	public Account getAccount(long id) {
 		System.out.println("in dao");
-		Session session = sessionFactory.getCurrentSession();
+		Session session = getSession();
 		Account acc= session.get(Account.class, id);
+		System.out.println("in dao2"+acc);
 		return acc;
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -33,8 +40,9 @@ public class ClientDaoImpl implements ClientDao {
 	@Override
 	public User createUser(User user) {
 		Session session = sessionFactory.getCurrentSession();
-		User createdUser=(User) session.save(user);
-		return createdUser;
+		//User createdUser=(User) session.merge(user);
+		session.save(user);
+		return user;
 	}
 
 

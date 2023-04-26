@@ -39,7 +39,7 @@ public class User {
 	@NotNull(message="email is required")
 	private String email;
 	
-	@NotNull(message="dateOfBirth is required")
+	//@NotNull(message="dateOfBirth is required")
 	private LocalDate dateOfBirth;
 	
 	@NotNull(message="pan is required")

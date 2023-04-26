@@ -15,7 +15,7 @@ public class CheckBalance implements BankTransaction{
 	@Override
 	public Account accountTransaction(BankTransactions transaction) {
 		logger.info("Checking balance");
-		Account account=bankTransactionDao.getAccountWithAccountId(transaction.getAccountId());
+		Account account=bankTransactionDao.getAccountWithAccountId(transaction.getAccount().getSourceAccountId());
 		if(account==null)
 			return null;
 		logger.info("Balance Check is successful ");

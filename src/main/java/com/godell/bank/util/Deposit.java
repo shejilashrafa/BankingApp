@@ -20,9 +20,9 @@ public class Deposit implements BankTransaction{
 	public Account accountTransaction(BankTransactions transaction) {
 		logger.info("In Deposit ");
 		double finalTransactionAmount=0;
-		Account account=bankTransactionDao.getAccountWithAccountId(transaction.getAccountId());
+		Account account=bankTransactionDao.getAccountWithAccountId(transaction.getAccount().getSourceAccountId());
 		if(account==null) {
-			logger.info("Account id "+transaction.getAccountId()+" is invalid");
+			logger.info("Account id "+transaction.getAccount().getSourceAccountId()+" is invalid");
 			return null;
 		}
 		finalTransactionAmount=TransactionOperationEnum.DEPOSIT.transactionOperation(transaction.getAmount(),account.getBalance());

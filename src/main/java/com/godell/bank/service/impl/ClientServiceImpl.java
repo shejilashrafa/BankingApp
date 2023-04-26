@@ -21,18 +21,14 @@ public class ClientServiceImpl implements ClientService {
 
 	@Override
 	public Account getAccount(long id) {
-		System.out.println("In service "+id);
 		return clientDao.getAccount(id);
 		 
 	}
-
 
 	@Override
 	public UserDto createUser(User user) {
 		
 		//List<User> allUsers=clientDao.getAllUsers();
-		
-		
 		user.setUserActivateStatus(true);
 		user.setDateOfBirth(LocalDate.now());
 		User createdUser=clientDao.createUser(user);
